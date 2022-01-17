@@ -1,7 +1,16 @@
-const container = document.querySelector('#container');
+function createGrid() {
+    const container = document.getElementById("container");
+    for(let i = 0; i < 16; i++) {
+        let row = document.createElement("div");
+        row.setAttribute("display", "inline-block");
+        row.textContent = "test";
+        for(let j = 0; j < 16; j++) {
+            let column = document.createElement("div");
+            column.textContent = "test2";
+            row.appendChild(column);
+        }
+        container.appendChild(row);
+    }
+}
 
-const content = document.createElement('div');
-content.classList.add('content');
-content.textContent = 'This is the glorious text-content!';
-
-container.appendChild(content);
+createGrid();
