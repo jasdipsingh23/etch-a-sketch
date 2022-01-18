@@ -1,14 +1,15 @@
-const grid = document.getElementById("grid");
+
 const DEFAULT_SIZE = 16;
+const grid = document.getElementById("grid");
+const clearBtn = document.getElementById("reset-btn");
 
+function createGrid(size) {
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
 
-function createGrid() {
-    grid.style.gridTemplateColumns = `repeat(${DEFAULT_SIZE}, 1fr)`
-    grid.style.gridTemplateRows = `repeat(${DEFAULT_SIZE}, 1fr)`
-
-    for(let i = 0; i < DEFAULT_SIZE * DEFAULT_SIZE; i++) {
+    for(let i = 0; i < size * size; i++) {
         let gridElement = document.createElement("div");
-        gridElement.textContent = "x";
+        gridElement.textContent = "";
         gridElement.addEventListener("mouseover", changeColor);
         grid.appendChild(gridElement);
     }
@@ -19,4 +20,10 @@ function changeColor(e) {
     e.target.style.backgroundColor = `rgb(200, 33, 49)`;
 }
 
-createGrid();
+function eraseGrid() {
+    let gridPixles = grid.querySelectorAll("div");
+    gridPixles.forEach(gridPixle => gridPixle.style.backgroundColor = "white");
+}
+
+createGrid(DEFAULT_SIZE);
+clearBtn.addEventListener("click", eraseGrid);
